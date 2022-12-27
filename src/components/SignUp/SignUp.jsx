@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import {  } from "react-router-dom"
 import Styles from '../../styles/sign-up/sign-up.module.css';
-import { signIn, firestore } from '../../services/firebase';
+import { signIn, firestore, register } from '../../services/firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../assets/img/logo/logo-2.png';
 import debounce from '../../functions/debounce';
@@ -11,6 +12,9 @@ const SignUp = () => {
   const [userInput, setUserInput] = useState('');
   const [userValue, setUserValue] = useState('');
   const [nameTaken, setNameTaken] = useState(false);
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ confirmPassword, setConfirmPassword ] = useState('');
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -85,6 +89,14 @@ const SignUp = () => {
     }
   }
 
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    if(password != confirmPassword) return;
+    register(email, password).then(
+
+    );
+  }
+
   return (
     <>
       {!currentUser ? (
@@ -97,25 +109,52 @@ const SignUp = () => {
               </div>
             </div>
             <div className={Styles.formContainer}>
-              <form pattern="[0-9a-zA-Z_.-]*" className={Styles.form}>
+              <form pattern="[0-9a-zA-Z_.-]*" className={Styles.form} onSubmit={handleSubmitForm}>
                 <div className={Styles.input}>
-                  <div className={Styles.username}>
-                    <p>@</p>
-                  </div>
+                    <input
+                        required
+                        className={Styles.inputBox}
+                        type="email"
+                        placeholder='Email'
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className={Styles.input}>
                   <input
                     required
                     onChange={handleValue}
                     className={Styles.inputBox}
                     type="text"
-                    placeholder="username"
+                    placeholder="Username"
                     maxLength="15"
                     minLength="3"
                     value={userValue}
                   />
                 </div>
+                <div className={Styles.input}>
+                  <input
+                      required
+                      onChange={e => setPassword(e.target.value)}
+                      value={password}
+                      placeholder="Password"
+                      type="password"
+                      className={Styles.inputBox}
+                  />
+                </div>
+                <div className={Styles.input}>
+                  <input
+                    required
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    value={confirmPassword}
+                    placeholder="Confirm Password"
+                    type="password"
+                    className={Styles.inputBox}
+                  />
+                </div>
                 <div className={Styles.helperDiv}>{nameHelper}</div>
-                <button
-                  type="submit"
+                {/* <button
+                  type="button"
                   onClick={!nameTaken && userInput.length > 2 ? handleSubmit : doNothing}
                   className={Styles.signUpButton}
                   style={
@@ -128,10 +167,10 @@ const SignUp = () => {
                   }
                 >
                   Sign Up With Google
-                </button>
+                </button> */}
               </form>
               <p className={Styles.or}>Already signed up?</p>
-              <button onClick={login} className={Styles.loginButton}>
+              <button className={Styles.loginButton} type="submit">
                 Login
               </button>
             </div>

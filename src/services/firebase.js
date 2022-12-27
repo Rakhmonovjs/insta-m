@@ -13,6 +13,7 @@ export const initFire = firebase.initializeApp({
   measurementId: "G-V5SPMRME4Y"
 });
 
+
 export const signIn = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider);
@@ -24,3 +25,12 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const storageRef = firebase.storage().ref();
 export const storage = firebase.storage();
+
+export const register = async ( email, password ) => {
+  try {
+     const response = await firebase.auth().createUserWithEmailAndPassword(auth, email, password)
+  }   
+  catch (err) {
+    console.log(err);
+  }
+}

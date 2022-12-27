@@ -140,6 +140,7 @@ const Nav = () => {
                   type="text"
                   placeholder="Search"
                 />
+                <input />
               </form>
               {openSearch && searchInput !== '' ? (
                 <NavSearch
