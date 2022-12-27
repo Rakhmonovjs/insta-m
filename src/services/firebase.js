@@ -3,13 +3,14 @@ import "firebase/auth";
 import "firebase/firestore";
 
 export const initFire = firebase.initializeApp({
-  apiKey: "AIzaSyBIjCCOMkG0uvSqFUwlOvIJoZCAA7_YXY4",
-  authDomain: "ins-cl.firebaseapp.com",
-  projectId: "ins-cl",
-  storageBucket: "ins-cl.appspot.com",
-  messagingSenderId: "270843005708",
-  appId: "1:270843005708:web:94854eb8f5630619f01729",
-  measurementId: "G-DPNJGSP77N"
+  apiKey: "AIzaSyDxQggtVJkyOnvTjVC115XmCGSPaW6UEjc",
+  authDomain: "instagrammm-da18b.firebaseapp.com",
+  databaseURL: "https://instagrammm-da18b-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "instagrammm-da18b",
+  storageBucket: "instagrammm-da18b.appspot.com",
+  messagingSenderId: "589599186434",
+  appId: "1:589599186434:web:98f0e28c9964a1efe2511b",
+  measurementId: "G-V5SPMRME4Y"
 });
 
 export const signIn = () => {
